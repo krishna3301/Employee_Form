@@ -1,0 +1,26 @@
+
+.content-table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+.content-table td, .content-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.content-table tr:hover {background-color: #ddd;}
+
+.content-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #008CBA;
+  color: white;
+}
+.deptId:hover,
+.deptId:focus {
+ /*  background-color: bisque; */
+  cursor: pointer;
+}
