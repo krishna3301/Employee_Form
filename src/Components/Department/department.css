@@ -1,20 +1,18 @@
-
-.outerdiv{
+.outerdiv {
   width: 100%;
   background-color: azure;
   display: flex;
   height: 700px;
 }
 
-.innerdiv1{
+.innerdiv1 {
   padding: 20px;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
   width: fit-content;
-
 }
-.innerdiv2{
+.innerdiv2 {
   padding: 20px;
   border: 1px solid black;
   display: flex;
@@ -23,44 +21,38 @@
   /* flex: 2;
   flex-basis: 60%; */
 }
-.innerdiv3{
+.innerdiv3 {
   padding: 20px;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
   width: 50%;
- 
 }
 
-.text{
+.text {
   height: 25px;
   padding: 5px;
   border-radius: 5px;
 }
-.ul{
+.ul {
   text-decoration: none;
   list-style: none;
   padding: 0%;
   display: flex;
   flex-direction: row;
 }
-.listitem{
-  background-color: beige;
+.listitem {
+  /*  background-color: beige; */
   padding: 10px;
   border-radius: 5px;
   text-align: center;
   width: 70%;
 }
-.button{
-    font-size: 12px;
-    width: 30%;
+.button {
+  font-size: 12px;
+  width: 30%;
 }
-/*
-  .addButton{
-  padding: 10px;
-  padding-top: 10px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
+.listitem:hover,
+.listitem:focus {
+  cursor: pointer;
 }
-*/

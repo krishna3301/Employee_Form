@@ -1,41 +1,44 @@
-import React, { useState } from "react";
-import { useSelector,useDispatch } from "react-redux";
-import { SaveEmpId, setEmpDisplay } from '../Redux/Action';
-//import EditEmpDetails from '../EditEmpDetails';
-import EmpDetails from '../ShowEmpDetails';
-import './Emptable.css';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { SaveEmpId, setEmpDisplay } from "../Redux/Action";
+import "./Emptable.css";
+import TableData from "./TableData";
 
-function EmpList(props){
+function EmpList(props) {
   const user = useSelector((state) => state.details);
-  const list = user.filter(dName => dName.deptName === props.deptName);
+  const list = user.filter((dName) => dName.deptName === props.deptName);
   const dispatch = useDispatch();
-  const [display, setDisplay] = useState(false);
-  const [open, setOpen] = useState(true);
+  const EmpId = useSelector((state) => state.EmpId);
 
-  return(
+  return (
     <div>
-    <div>
-      <h3> List of Employee: </h3>
-      <table className="content-table">
-        <thead>
-          <tr>
-            <th>EmpId</th>
-            <th> Name</th>
-          </tr>
-        </thead>
-        <tbody>
-        
-          {list.map((data) => (
+      <div>
+        <h3> List of Employee: </h3>
+        <table className="content-table">
+          <thead>
             <tr>
-            <td className="EmpId" onClick={() => {dispatch(SaveEmpId(data.id))
-                                      setDisplay(true)
-                                      dispatch(setEmpDisplay(display))}}> {data.id} </td>
-            <td> {data.name} </td>
+              <th>EmpId</th>
+              <th> Name</th>
             </tr>
-          ))}
-        </tbody>
-      </table> </div>
-  </div>
+          </thead>
+          <tbody>
+            {list.map((data) => (
+              <tr key={data.name}>
+                <TableData
+                  selected={{ temp: data.id === EmpId ? true : false }}
+                  value={data.id}
+                  onClick={() => {
+                    dispatch(SaveEmpId(data.id));
+                    dispatch(setEmpDisplay(true));
+                  }}
+                />
+                <td style={{ backgroundColor: "beige" }}> {data.name} </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>{" "}
+      </div>
+    </div>
   );
 }
 

@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
 //import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { useSelector,useDispatch } from "react-redux";
-import {updateEmployee} from '../Redux/Action';
+import DialogTitle from "@material-ui/core/DialogTitle";
+import { useSelector, useDispatch } from "react-redux";
+import { updateEmployee, setEditDisplay } from "../Redux/Action";
 
-
-function EditEmpDetails(props){
+function EditEmpDetails(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
@@ -19,51 +18,54 @@ function EditEmpDetails(props){
   const [reportingTo, setReportingTo] = useState("");
   const [designation, setDesignation] = useState("");
   const user = useSelector((state) => state.details);
-  const [deptName, setDeptName] = useState(useSelector((state) => state.deptName));
+  const [deptName] = useState(useSelector((state) => state.deptName));
+  let dName = deptName;
   const EmpId = useSelector((state) => state.EmpId);
-  const employee = user.find(item => item.deptName === deptName && item.id === EmpId);
-  const [open, setOpen] = useState(props.open);
+  const employee = user.find(
+    (item) => item.deptName === dName && item.id === EmpId
+  );
+  const open = useSelector((state) => state.editDisplay);
   const dispatch = useDispatch();
-  
-  useEffect( () => {
-     setName(employee.name)
-     setEmail(employee.email)
-     setGender(employee.gender)
-     setAge(employee.age)
-     setCurrentProject(employee.currentProject)
-     setReportingTo(employee.reportingTo)
-     setDesignation(employee.designation) 
+
+  useEffect(() => {
+    if (employee !== undefined) {
+      setName(employee.name);
+      setEmail(employee.email);
+      setGender(employee.gender);
+      setAge(employee.age);
+      setCurrentProject(employee.currentProject);
+      setReportingTo(employee.reportingTo);
+      setDesignation(employee.designation);
+    }
   }, [employee]);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
-    setOpen(false);
+    dispatch(setEditDisplay(false));
   };
 
   const handleSave = () => {
+    dispatch(setEditDisplay(false));
     const employee = {
       deptName: deptName,
       id: EmpId,
-      name: name, 
+      name: name,
       email: email,
       gender: gender,
       age: age,
       currentProject: currentProject,
       reportingTo: reportingTo,
-      designation: designation
+      designation: designation,
     };
     dispatch(updateEmployee(employee));
-    
-    setOpen(false);
   };
 
-  return(
-    <div>  
-    
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+  return (
+    <div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
         <DialogTitle id="form-dialog-title">Edit Employee Details</DialogTitle>
         <DialogContent>
           <TextField
@@ -73,6 +75,7 @@ function EditEmpDetails(props){
             type="text"
             fullWidth
             value={deptName}
+            disabled
           />
           <TextField
             margin="dense"
@@ -81,6 +84,7 @@ function EditEmpDetails(props){
             type="text"
             fullWidth
             value={EmpId}
+            disabled
           />
           <TextField
             margin="dense"
@@ -89,9 +93,7 @@ function EditEmpDetails(props){
             type="text"
             fullWidth
             value={name}
-            onChange={(e) => 
-              setName(e.target.value)
-              }
+            onChange={(e) => setName(e.target.value)}
           />
           <TextField
             margin="dense"
@@ -100,9 +102,7 @@ function EditEmpDetails(props){
             type="email"
             fullWidth
             value={email}
-            onChange={(e) => 
-              setEmail(e.target.value)
-              }
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             margin="dense"
@@ -111,9 +111,7 @@ function EditEmpDetails(props){
             type="text"
             fullWidth
             value={gender}
-            onChange={(e) => 
-              setGender(e.target.value)
-              }
+            onChange={(e) => setGender(e.target.value)}
           />
           <TextField
             margin="dense"
@@ -122,9 +120,7 @@ function EditEmpDetails(props){
             type="text"
             fullWidth
             value={age}
-            onChange={(e) => 
-              setAge(e.target.value)
-              }
+            onChange={(e) => setAge(e.target.value)}
           />
           <TextField
             margin="dense"
@@ -133,9 +129,7 @@ function EditEmpDetails(props){
             type="text"
             fullWidth
             value={currentProject}
-            onChange={(e) => 
-              setCurrentProject(e.target.value)
-              }
+            onChange={(e) => setCurrentProject(e.target.value)}
           />
           <TextField
             margin="dense"
@@ -144,9 +138,7 @@ function EditEmpDetails(props){
             type="text"
             fullWidth
             value={reportingTo}
-            onChange={(e) => 
-              setReportingTo(e.target.value)
-              }
+            onChange={(e) => setReportingTo(e.target.value)}
           />
           <TextField
             margin="dense"
@@ -155,25 +147,20 @@ function EditEmpDetails(props){
             type="text"
             fullWidth
             value={designation}
-            onChange={(e) => 
-              setDesignation(e.target.value)
-              }
+            onChange={(e) => setDesignation(e.target.value)}
           />
-      
         </DialogContent>
-          <DialogActions>
+        <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          
+
           <Button onClick={handleSave} color="primary">
             Save
           </Button>
-        </DialogActions> 
+        </DialogActions>
       </Dialog>
-
-</div>
-
+    </div>
   );
 }
 
