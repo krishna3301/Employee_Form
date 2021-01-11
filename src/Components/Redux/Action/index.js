@@ -4,9 +4,9 @@ export const SaveDeptName = (deptName) => ({
   payload: deptName
 });
 
-export const SaveDeptId = (deptId) => ({
+export const SaveEmpId = (EmpId) => ({
   type: "Save_Dept_Id",
-  payload: deptId
+  payload: EmpId
 });
 
 export const UpdateDeptList = (department) => ({
@@ -28,3 +28,8 @@ export const setEmpDisplay = (display) => ({
   type: "Update_Employee_Display",
   payload: display
 });
+
+export const deleteEmployee = (empId) => ({
+  type: "Delete_Employee_from_List",
+  payload: empId
+})

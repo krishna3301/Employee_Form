@@ -3,7 +3,7 @@
   width: 100%;
   background-color: azure;
   display: flex;
-  height: 750px;
+  height: 700px;
 }
 
 .innerdiv1{
@@ -19,10 +19,19 @@
   border: 1px solid black;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 50%;
   /* flex: 2;
   flex-basis: 60%; */
 }
+.innerdiv3{
+  padding: 20px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+ 
+}
+
 .text{
   height: 25px;
   padding: 5px;
@@ -46,3 +55,12 @@
     font-size: 12px;
     width: 30%;
 }
+/*
+  .addButton{
+  padding: 10px;
+  padding-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+*/

@@ -2,7 +2,7 @@
 const initialState = {
   empDisplay: false,
   deptName: "",
-  deptId: "",
+  EmpId: "",
   deptList: [],
   details: [],
   
@@ -27,10 +27,10 @@ function EmpReducer(state = initialState, action)
     };
 
     case "Save_Dept_Id":
-    state.deptId = action.payload;
+    state.EmpId = action.payload;
     return {
       ...state,
-      deptId: state.deptId,
+      EmpId: state.EmpId,
     };
 
     case "Update_Dept_List":
@@ -54,6 +54,16 @@ function EmpReducer(state = initialState, action)
       ...state,
       details: [...state.details]
     };
+
+    case "Delete_Employee_from_List":
+    let deleteUserIndex = state.details.findIndex(item => item.id === action.payload.empId);
+    state.details.splice(deleteUserIndex, 1);
+    //state.details[updateUserIndex] = action.payload
+    return {
+      ...state,
+      details: [...state.details]
+    };
+
 
     default: 
     return state;

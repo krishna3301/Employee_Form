@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+//import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useSelector,useDispatch } from "react-redux";
 import {updateEmployee} from '../Redux/Action';
@@ -20,8 +20,8 @@ function EditEmpDetails(props){
   const [designation, setDesignation] = useState("");
   const user = useSelector((state) => state.details);
   const [deptName, setDeptName] = useState(useSelector((state) => state.deptName));
-  const deptId = useSelector((state) => state.deptId);
-  const employee = user.find(item => item.deptName === deptName && item.id === deptId);
+  const EmpId = useSelector((state) => state.EmpId);
+  const employee = user.find(item => item.deptName === deptName && item.id === EmpId);
   const [open, setOpen] = useState(props.open);
   const dispatch = useDispatch();
   
@@ -46,7 +46,7 @@ function EditEmpDetails(props){
   const handleSave = () => {
     const employee = {
       deptName: deptName,
-      id: deptId,
+      id: EmpId,
       name: name, 
       email: email,
       gender: gender,
@@ -80,7 +80,7 @@ function EditEmpDetails(props){
             label="Employee Id"
             type="text"
             fullWidth
-            value={deptId}
+            value={EmpId}
           />
           <TextField
             margin="dense"

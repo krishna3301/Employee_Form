@@ -31,20 +31,30 @@ function Department()
       setDept("")
     }
   }
+  const handleDelete =(index) => {
+    let list = [...deptList];
+  //  list.splice(key, 1);
+  //  setDeptList(list);
+    console.log(index);
+   // console.log(e.target.value.key);
+  }
 
   return(
     <div className="outerdiv">
     <div className="innerdiv1">
     <input className="text" type="text" value={dept} onChange={handleDept} /> &nbsp;
-    <Button variant="contained" color="primary" onClick={handleButton}>
+    
+    <Button className="addButton" variant="contained" color="primary" onClick={handleButton}>
       Add 
     </Button>
+    
     {display && (
-      deptList.map((name) => (
+      deptList.map((name, index) => (
         <ul className="ul">
-        <li className="listitem" onClick= {() => {dispatch(SaveDeptName(name.dept));
-                               setDisplayDept(true) }}> {name.dept} </li>
-         <button className="button"> Delete </ button>                     
+        <li className="listitem" key={name.dept} onClick= {() => {dispatch(SaveDeptName(name.dept));
+                               setDisplayDept(true) }} > {name.dept} </li>
+         <button className="button" onClick = {() => { let list = [...deptList]; let index=list.findIndex((item) => item.dept===name.dept);
+                      list.splice(index, 1); setDeptList([list]) }} key={name.dept}> Delete </button>                     
         </ul>
         ))
     )}
@@ -54,7 +64,7 @@ function Department()
         <DeptDetails />
     )}
     </div>
-    <div>
+    <div className="innerdiv3">
       {displayEmp && 
         <EmpDetails />
       }

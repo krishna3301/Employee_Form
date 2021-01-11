@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
-import { SaveDeptId, setEmpDisplay } from '../Redux/Action';
+import { SaveEmpId, setEmpDisplay } from '../Redux/Action';
 //import EditEmpDetails from '../EditEmpDetails';
 import EmpDetails from '../ShowEmpDetails';
 import './Emptable.css';
@@ -27,7 +27,7 @@ function EmpList(props){
         
           {list.map((data) => (
             <tr>
-            <td className="deptId" onClick={() => {dispatch(SaveDeptId(data.id))
+            <td className="EmpId" onClick={() => {dispatch(SaveEmpId(data.id))
                                       setDisplay(true)
                                       dispatch(setEmpDisplay(display))}}> {data.id} </td>
             <td> {data.name} </td>
@@ -35,11 +35,6 @@ function EmpList(props){
           ))}
         </tbody>
       </table> </div>
-      {/* <div>
-      {display && 
-        <EmpDetails />
-      }
-    </div> */}
   </div>
   );
 }

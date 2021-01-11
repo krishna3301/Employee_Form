@@ -19,8 +19,8 @@
   background-color: #008CBA;
   color: white;
 }
-.deptId:hover,
-.deptId:focus {
+.EmpId:hover,
+.EmpId:focus {
  /*  background-color: bisque; */
   cursor: pointer;
 }
